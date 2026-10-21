@@ -202,7 +202,7 @@ p { color: var(--muted); max-width: 64ch; }
   inset: 0;
   background-image:
     linear-gradient(to right, rgba(10,10,10,0.72) 0%, rgba(10,10,10,0.35) 60%, rgba(10,10,10,0.18) 100%),
-    url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?fm=jpg&q=80&w=2400&auto=format&fit=crop');
+    url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?fm=jpg&q=85&w=2400&auto=format&fit=crop&ixlib=rb-4.0.3');
   background-size: cover;
   background-position: center 30%;
   background-attachment: fixed;
