@@ -292,6 +292,36 @@ p { color: var(--muted); max-width: 64ch; }
   height: 100%;
   object-fit: cover;
   background: #000;
+}
+/* YouTube click-to-play facade */
+.yt-facade {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  background: #000;
+}
+.yt-facade img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s;
+}
+.yt-facade:hover img { opacity: 0.85; }
+.yt-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(56px, 10vw, 80px);
+  filter: drop-shadow(0 2px 12px rgba(0,0,0,0.6));
+  transition: transform 0.15s, filter 0.15s;
+  pointer-events: none;
+}
+.yt-facade:hover .yt-play-btn {
+  transform: translate(-50%, -50%) scale(1.1);
+  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.8));
+}
   border: 0;
 }
 

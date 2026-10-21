@@ -134,8 +134,35 @@
     <h2 class="section-title">Watch Us Work</h2>
     <p class="section-sub">From teardown to clean site — see what a Gallatin Demo job looks like.</p>
     <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/13kHG9X8JTo" title="Gallatin Demo & Removal — Demolition Work in Bozeman, Montana" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <div class="yt-facade" id="yt-facade" onclick="loadYT()" role="button" tabindex="0" aria-label="Play video: Gallatin Demo & Removal">
+        <img src="https://img.youtube.com/vi/13kHG9X8JTo/maxresdefault.jpg"
+             onerror="this.src='https://img.youtube.com/vi/13kHG9X8JTo/hqdefault.jpg'"
+             alt="Gallatin Demo & Removal — play video" loading="lazy">
+        <div class="yt-play-btn" aria-hidden="true">
+          <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.8 0 34 0 34 0S12.2 0 7.5 1.7a8.5 8.5 0 0 0-6 6C0 12.4 0 24 0 24s0 11.6 1.5 16.3a8.5 8.5 0 0 0 6 6C12.2 48 34 48 34 48s21.8 0 26.5-1.7a8.5 8.5 0 0 0 6-6C68 35.6 68 24 68 24s0-11.6-1.5-16.3z" fill="#ff0000"/>
+            <path d="M27 34l18-10-18-10v20z" fill="#fff"/>
+          </svg>
+        </div>
+      </div>
     </div>
+    <script>
+    function loadYT() {
+      var f = document.getElementById('yt-facade');
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/13kHG9X8JTo?autoplay=1&rel=0';
+      iframe.title = 'Gallatin Demo & Removal — Demolition Work in Bozeman, Montana';
+      iframe.frameBorder = '0';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
+      f.parentNode.style.position = 'relative';
+      f.parentNode.replaceChild(iframe, f);
+    }
+    document.getElementById('yt-facade').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') loadYT();
+    });
+    </script>
   </div>
 </section>
 
