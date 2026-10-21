@@ -1360,11 +1360,14 @@ p { color: var(--muted); max-width: 64ch; }
 .reviews-link:hover { background: rgba(224,112,32,0.1); border-color: var(--orange); }
 .reviews-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
 }
-@media (max-width: 768px) { .reviews-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .reviews-grid { grid-template-columns: 1fr; } }
+.review-card-featured {
+  padding: 2rem 2rem 1.75rem;
+}
 .review-card {
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--border);
