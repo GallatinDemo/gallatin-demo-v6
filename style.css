@@ -933,3 +933,166 @@ p { color: var(--muted); max-width: 64ch; }
   transition: opacity 0.3s;
 }
 .gallery-item:hover figcaption { opacity: 1; }
+
+/* ── Hero v2 — big brand name style ─────────────────────── */
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.4rem;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 3px;
+  padding: 0.32rem 0.75rem;
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,245,240,0.85);
+}
+.hero-badge i { color: var(--orange); font-size: 0.65rem; }
+.hero-brand {
+  font-family: var(--font-head);
+  font-size: clamp(3.8rem, 11vw, 9rem);
+  font-weight: 700;
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.hero-tagline {
+  font-family: var(--font-label);
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+.hero-quote-btn {
+  font-size: 1rem !important;
+  padding: 1rem 2.4rem !important;
+  box-shadow: 0 0 0 3px rgba(224,112,32,0.35), 0 4px 24px rgba(224,112,32,0.3) !important;
+}
+.hero-quote-btn:hover {
+  box-shadow: 0 0 0 4px rgba(224,112,32,0.55), 0 6px 32px rgba(224,112,32,0.45) !important;
+  transform: translateY(-1px);
+}
+.btn-xl { font-size: 1rem; padding: 1rem 2.4rem; }
+.btn-phone {
+  background: rgba(255,255,255,0.08);
+  color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.25);
+}
+.btn-phone:hover { background: rgba(255,255,255,0.14); border-color: var(--white); }
+
+/* ── The Difference Matters section ─────────────────────── */
+.difference-section { background: var(--dark); border-top: 1px solid var(--border); }
+.section-eyebrow {
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.6rem;
+}
+.section-title-left {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 0.9rem;
+}
+.difference-sub {
+  font-size: 1.05rem;
+  color: rgba(245,245,240,0.72);
+  max-width: 58ch;
+  margin-bottom: 2.5rem;
+  line-height: 1.65;
+}
+.difference-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 640px) {
+  .difference-grid { grid-template-columns: 1fr; }
+}
+.diff-panel {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.diff-bad {
+  background: #111;
+  border: 1px solid rgba(139,26,26,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.diff-icon-wrap svg {
+  width: min(60%, 180px);
+  height: auto;
+}
+.diff-good img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.diff-check-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.22);
+}
+.diff-check-overlay svg {
+  width: min(55%, 170px);
+  height: auto;
+  filter: drop-shadow(0 0 12px rgba(46,125,50,0.6));
+}
+.diff-label {
+  font-family: var(--font-label);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.diff-label-bad { color: #c0392b; }
+.diff-label-good { color: #4caf50; }
+.difference-cta-line {
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,245,240,0.65);
+  text-align: center;
+}
+.diff-cta-link {
+  color: var(--orange);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(224,112,32,0.4);
+  padding-bottom: 1px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.diff-cta-link:hover { color: #f08030; border-color: #f08030; }
