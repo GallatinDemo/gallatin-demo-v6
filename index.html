@@ -392,6 +392,7 @@
 
       <!-- Form -->
       <form class="quote-form" action="https://formspree.io/f/mvzldobw" method="POST">
+        <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" >
         <div class="form-row">
           <div class="form-group">
             <label for="name">Full Name <span class="req">*</span></label>
@@ -451,6 +452,7 @@
         <button type="submit" class="btn btn-primary btn-submit-full">
           <i class="fa-solid fa-paper-plane"></i> Submit Quote Request
         </button>
+        <p id="quote-feedback" role="status" aria-live="polite" style="margin-top:12px"></p>
         <p class="form-privacy"><i class="fa-solid fa-lock"></i> Your info is only used to contact you about your project. We respond within 1 business day.</p>
       </form>
 
@@ -469,6 +471,53 @@
 <!-- Footer injected by nav.js -->
 <div id="footer-placeholder"></div>
 
+<script>
+(function () {
+  const form = document.querySelector('.quote-form');
+  if (!form) return;
+  const feedback = document.getElementById('quote-feedback');
+  const submit = form.querySelector('[type="submit"]');
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    if (!form.reportValidity() || submit.disabled) return;
+    submit.disabled = true;
+    const oldLabel = submit.innerHTML;
+    submit.textContent = 'Sending your request…';
+    feedback.textContent = '';
+    const data = new FormData(form);
+    const payload = {
+      submission_id: (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : undefined,
+      name: data.get('name'), email: data.get('email'), phone: data.get('phone'),
+      address: data.get('address'), project_type: data.get('project_type'),
+      services: data.getAll('services'), message: data.get('message'),
+      contact_method: data.get('contact_method'), company_website: data.get('company_website')
+    };
+    // Send the same request to the existing email provider and to the CRM.
+    // Independent requests ensure one service's outage does not prevent the other.
+    const [emailResult, crmResult] = await Promise.allSettled([
+      fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+        .then(async r => { if (!r.ok) throw new Error('Email provider rejected request'); return r; }),
+      fetch('/api/quote', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+        .then(async r => { if (!r.ok) throw new Error('CRM rejected request'); return r; })
+    ]);
+    const emailOK = emailResult.status === 'fulfilled';
+    const crmOK = crmResult.status === 'fulfilled';
+    if (emailOK && crmOK) {
+      feedback.textContent = 'Thank you! Your quote request was received. We will contact you soon.';
+      form.reset();
+    } else if (emailOK || crmOK) {
+      feedback.textContent = 'Your request reached us, but one notification system had a problem. Please do not resubmit; call (406) 595-3457 if you need immediate confirmation.';
+      form.reset();
+      console.warn('Quote partial delivery', { emailOK, crmOK });
+    } else {
+      feedback.textContent = 'We could not send your request. Please try again or call (406) 595-3457.';
+      console.error('Quote delivery failed', emailResult, crmResult);
+    }
+    submit.disabled = false;
+    submit.innerHTML = oldLabel;
+  });
+})();
+</script>
 <script src="nav.js"></script>
 </body>
 </html>
