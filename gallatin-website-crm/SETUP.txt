@@ -1,0 +1,25 @@
+GALLATIN DEMO WEBSITE -> CRM LEAD INTAKE
+
+1. In your PUBLIC WEBSITE GitHub repository (gallatin-demo-v6), replace root index.html with the included index.html.
+2. Create a root folder called api and upload api/quote.js into it. Keep the exact path api/quote.js.
+3. In Vercel, open the PUBLIC WEBSITE project gallatin-demo-v6 -> Settings -> Environment Variables.
+   Add these server-only environment variables (Production; Preview if needed):
+     SUPABASE_URL = your existing Supabase project URL (same URL used by CRM config.js)
+     SUPABASE_SERVICE_ROLE_KEY = the Supabase secret service_role key, from Supabase project API settings.
+     FORMSPREE_URL = https://formspree.io/f/mvzldobw (optional, to keep Formspree email notifications)
+   IMPORTANT: The service_role key bypasses database row-level security. NEVER put it in index.html,
+   config.js, public GitHub, screenshots, or the browser. Add it ONLY as a Vercel server environment variable.
+4. Redeploy the Vercel website after adding environment variables.
+5. Test by submitting a clearly labeled TEST quote from www.gallatindemo.com.
+6. Log in to your CRM and confirm a New lead appears with name, contact info and description.
+7. Verify any Formspree notification emails arrive (if configured). Delete the test lead afterward.
+
+The original Formspree action remains in the HTML as a fallback if the API endpoint fails.
+The CRM index.html and config.js do NOT need changes for this integration.
+
+IMPORTANT BEFORE LAUNCH:
+- The endpoint is PUBLIC and can be spammed. Add Cloudflare Turnstile server-side verification and
+  rate limiting before advertising heavily. The included honeypot alone is not sufficient.
+- Consider making the endpoint idempotent to avoid duplicate leads if requests are retried.
+- If you have a Vercel framework/build setup with routing rules, confirm /api/quote maps to this function.
+- Do not submit real customer details until the test succeeds.
